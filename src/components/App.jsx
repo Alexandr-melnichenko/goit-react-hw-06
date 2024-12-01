@@ -4,9 +4,11 @@ import ContactForm from "./ContactForm/ContactForm";
 import SearchBox from "./SearchBox/SearchBox";
 import ContactList from "./ContactList/ContactList";
 import { useSelector } from "react-redux";
-// import { deleteContact } from "../redux/contactsSlice";
+import { deleteContact } from "../redux/contactsSlice";
 
 function App() {
+  const deleteContact = useSelector(deleteContact);
+
   // Стани для контактів
   const [contacts, setContact] = useState(() => {
     const savedContacts = JSON.parse(
@@ -42,7 +44,6 @@ function App() {
     setContact((prevContacts) => [...prevContacts, newContact]);
   };
 
-  const deleteContact = useSelector(deleteContact);
   // Функція видалення контакту
   // const deleteContact = (id) => {
   //   setContact((prevContacts) =>
