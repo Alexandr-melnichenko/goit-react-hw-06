@@ -30,3 +30,7 @@ export const { changeFilter } = slice.actions;
 // const filteredContacts = contacts.filter((contact) =>
 //     contact.name.toLowerCase().includes(searchValue.toLowerCase())
 //   );
+
+// const handleChange = (evt) => {
+//     setSearchValue(evt.target.value);
+//   };

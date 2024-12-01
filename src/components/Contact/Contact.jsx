@@ -1,8 +1,11 @@
 import style from "./Contact.module.css";
 import { ImPhone } from "react-icons/im";
 import { RiContactsFill } from "react-icons/ri";
+import { useDispatch } from "react-redux";
 
 const Contact = ({ contact, deleteContact }) => {
+  const dispatch = useDispatch();
+
   return (
     <div className={style.contactContainer}>
       <div className={style.params}>
@@ -17,7 +20,7 @@ const Contact = ({ contact, deleteContact }) => {
       </div>
       <button
         className={style.deleteButton}
-        onClick={() => deleteContact(contact.id)}
+        onClick={dispatch(deleteContact(contact.id))}
       >
         Delete
       </button>

@@ -3,6 +3,8 @@ import "./App.css";
 import ContactForm from "./ContactForm/ContactForm";
 import SearchBox from "./SearchBox/SearchBox";
 import ContactList from "./ContactList/ContactList";
+import { useSelector } from "react-redux";
+// import { deleteContact } from "../redux/contactsSlice";
 
 function App() {
   // Стани для контактів
@@ -40,12 +42,13 @@ function App() {
     setContact((prevContacts) => [...prevContacts, newContact]);
   };
 
+  const deleteContact = useSelector(deleteContact);
   // Функція видалення контакту
-  const deleteContact = (id) => {
-    setContact((prevContacts) =>
-      prevContacts.filter((contact) => contact.id !== id)
-    );
-  };
+  // const deleteContact = (id) => {
+  //   setContact((prevContacts) =>
+  //     prevContacts.filter((contact) => contact.id !== id)
+  //   );
+  // };
 
   return (
     <div className="wrap">

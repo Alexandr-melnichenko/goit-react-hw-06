@@ -3,6 +3,8 @@ import { nanoid } from "nanoid";
 import * as Yup from "yup";
 import MaskedInput from "react-text-mask";
 import stl from "./ContactForm.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { addContact, selectContacts } from "../../redux/contactsSlice";
 
 const FeedBackSchema = Yup.object().shape({
   name: Yup.string()
@@ -22,7 +24,11 @@ const FeedBackSchema = Yup.object().shape({
     .required("Required"),
 });
 
-const ContactForm = ({ onAddContact }) => {
+const ContactForm = () => {
+  const dispatch = useDispatch();
+  const onAddContact = useSelector(selectContacts);
+  console.log("onAddContact:", onAddContact);
+
   const initialValues = {
     name: "",
     number: "",
@@ -37,6 +43,7 @@ const ContactForm = ({ onAddContact }) => {
     onAddContact(newContact);
     console.log(newContact);
     actions.resetForm();
+    dispatch(addContact(newContact));
   };
 
   return (
