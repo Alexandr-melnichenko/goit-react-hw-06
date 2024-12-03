@@ -40,7 +40,6 @@ const ContactForm = () => {
       id: nanoid(),
     };
 
-    // Проверка на дублирующиеся контакты
     const isDuplicate = contacts.some(
       (contact) => contact.name.toLowerCase() === newContact.name.toLowerCase()
     );
@@ -49,8 +48,6 @@ const ContactForm = () => {
       alert(`${newContact.name} is already in contacts!`);
       return;
     }
-    // onAddContact(newContact);
-    console.log("New Contact in Form:", newContact);
 
     dispatch(addContact(newContact));
     actions.resetForm();

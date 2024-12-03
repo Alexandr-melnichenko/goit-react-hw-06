@@ -4,11 +4,9 @@ import s from "./ContactList.module.css";
 import { selectNameFilter } from "../../redux/filtersSlice";
 import { selectContacts } from "../../redux/contactsSlice";
 
-const ContactList = ({ deleteContact }) => {
+const ContactList = () => {
   const searchValue = useSelector(selectNameFilter);
   const contacts = useSelector(selectContacts);
-  console.log("SearchValue:", searchValue);
-  console.log("filteredContacts", contacts);
 
   const filteredContacts = contacts.filter((contact) =>
     contact.name.toLowerCase().includes(searchValue.toLowerCase())
@@ -19,20 +17,12 @@ const ContactList = ({ deleteContact }) => {
       {searchValue === ""
         ? contacts.map((contact) => (
             <li key={contact.id}>
-              <Contact
-                contact={contact}
-                // updateContacts={updateContacts}
-                deleteContact={deleteContact}
-              />
+              <Contact contact={contact} />
             </li>
           ))
         : filteredContacts.map((contact) => (
             <li key={contact.id}>
-              <Contact
-                contact={contact}
-                // updateContacts={updateContacts}
-                deleteContact={deleteContact}
-              />
+              <Contact contact={contact} />
             </li>
           ))}
     </ul>
