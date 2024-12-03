@@ -26,8 +26,8 @@ const FeedBackSchema = Yup.object().shape({
 
 const ContactForm = () => {
   const dispatch = useDispatch();
-  const onAddContact = useSelector(selectContacts);
-  console.log("onAddContact:", onAddContact);
+  const contacts = useSelector(selectContacts);
+  console.log("Contacts in contact form:", contacts);
 
   const initialValues = {
     name: "",
@@ -40,10 +40,20 @@ const ContactForm = () => {
       id: nanoid(),
     };
 
-    onAddContact(newContact);
-    console.log(newContact);
-    actions.resetForm();
+    // Проверка на дублирующиеся контакты
+    const isDuplicate = contacts.some(
+      (contact) => contact.name.toLowerCase() === newContact.name.toLowerCase()
+    );
+
+    if (isDuplicate) {
+      alert(`${newContact.name} is already in contacts!`);
+      return;
+    }
+    // onAddContact(newContact);
+    console.log("New Contact in Form:", newContact);
+
     dispatch(addContact(newContact));
+    actions.resetForm();
   };
 
   return (

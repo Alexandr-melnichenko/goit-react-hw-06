@@ -1,30 +1,35 @@
 import { createSlice } from "@reduxjs/toolkit";
+// import { createSelector } from "reselect";
 
 const initialState = {
-  contacts: {
-    items: [],
-  },
-  filters: {
-    name: "",
-  },
+  items: [],
 };
+
+console.log("InitialState in contactSlice:", initialState);
 
 const slice = createSlice({
   name: "contacts",
   initialState,
   reducers: {
     addContact: (state, action) => {
-      state.items.push(action.payload);
+      state.contacts.items.push(action.payload);
     },
     deleteContact: (state, action) => {
-      state.contacts = state.items.filter((item) => item.id !== action.payload);
+      state.contacts.items = state.contacts.items.filter(
+        (item) => item.id !== action.payload
+      );
     },
   },
 });
 
-export const selectContacts = (state) => state.contacts;
+export const selectContacts = (state) => state.contact?.items || [];
 export const contactsReducer = slice.reducer;
 export const { addContact, deleteContact } = slice.actions;
+// export const selectContacts = createSelector(
+//   (state) => state.contact.items,
+//   (contacts) => contacts // Мемоизация, если contacts не изменились, результат будет кэширован
+// );
+console.log("state.contact.items:", selectContacts);
 
 // Функція добавлення нового контакту до списку
 // const addContact = (newContact) => {

@@ -1,13 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import searchValue from "../components/App";
 
 const initialState = {
-  contacts: {
-    items: [],
-  },
-  filters: {
-    name: "",
-  },
+  name: "",
 };
 
 const slice = createSlice({
@@ -15,22 +9,21 @@ const slice = createSlice({
   initialState,
   reducers: {
     changeFilter: (state, action) => {
-      state.filters = state.filters.name
-        .toLowerCase()
-        .includes(searchValue.toLowerCase(action.payload));
+      const searchValue = action.payload
+        ? action.payload.toString().toLowerCase()
+        : "";
+
+      if (state.filters && state.filters.name !== undefined) {
+        state.filters.name = searchValue;
+      } else {
+        console.error(
+          "Ошибка: структура состояния нарушена. Проверьте инициализацию Redux state."
+        );
+      }
     },
   },
 });
 
 export const filtersReducer = slice.reducer;
-export const selectNameFilter = (state) => state.filters.name;
+export const selectNameFilter = (state) => state.filters?.name || "";
 export const { changeFilter } = slice.actions;
-
-//Фільтрований список контактів
-// const filteredContacts = contacts.filter((contact) =>
-//     contact.name.toLowerCase().includes(searchValue.toLowerCase())
-//   );
-
-// const handleChange = (evt) => {
-//     setSearchValue(evt.target.value);
-//   };

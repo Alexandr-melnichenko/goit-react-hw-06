@@ -3,11 +3,11 @@ import "./App.css";
 import ContactForm from "./ContactForm/ContactForm";
 import SearchBox from "./SearchBox/SearchBox";
 import ContactList from "./ContactList/ContactList";
-import { useSelector } from "react-redux";
-import { deleteContact } from "../redux/contactsSlice";
+// import { useSelector } from "react-redux";
+// import { deleteContact } from "../redux/contactsSlice";
 
 function App() {
-  const deleteContact = useSelector(deleteContact);
+  // const deleteContact = useSelector(deleteContact);
 
   // Стани для контактів
   const [contacts, setContact] = useState(() => {
@@ -32,35 +32,35 @@ function App() {
   }, [contacts]);
 
   // Стани для пошуку
-  const [searchValue, setSearchValue] = useState("");
+  // const [searchValue, setSearchValue] = useState("");
 
   //Фільтрований список контактів
-  const filteredContacts = contacts.filter((contact) =>
-    contact.name.toLowerCase().includes(searchValue.toLowerCase())
-  );
+  // const filteredContacts = contacts.filter((contact) =>
+  //   contact.name.toLowerCase().includes(searchValue.toLowerCase())
+  // );
 
   // Функція добавлення нового контакту до списку
-  const addContact = (newContact) => {
-    setContact((prevContacts) => [...prevContacts, newContact]);
-  };
+  // const addContact = (newContact) => {
+  //   setContact((prevContacts) => [...prevContacts, newContact]);
+  // };
 
   // Функція видалення контакту
-  // const deleteContact = (id) => {
-  //   setContact((prevContacts) =>
-  //     prevContacts.filter((contact) => contact.id !== id)
-  //   );
-  // };
+  const deleteContact = (id) => {
+    setContact((prevContacts) =>
+      prevContacts.filter((contact) => contact.id !== id)
+    );
+  };
 
   return (
     <div className="wrap">
       <h1>Phonebook</h1>
-      <ContactForm onAddContact={addContact} />
-      <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
+      <ContactForm />
+      <SearchBox />
       <ContactList
-        contacts={contacts}
-        updateContacts={setContact}
-        filteredContacts={filteredContacts}
-        searchValue={searchValue}
+        // contacts={contacts}
+        // updateContacts={setContact}
+        // filteredContacts={filteredContacts}
+        // searchValue={searchValue}
         deleteContact={deleteContact}
       />
     </div>
